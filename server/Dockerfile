@@ -10,11 +10,12 @@ RUN apt-get update -y && \
 
 WORKDIR /app
 
-COPY requirements.txt /app/requirements.txt
+# When building from repo root context, copy from server/
+COPY server/requirements.txt /app/requirements.txt
 RUN python -m pip install --upgrade pip && \
     pip install -r /app/requirements.txt
 
-COPY . /app
+COPY server/ /app
 
 # Expose uvicorn port
 EXPOSE 8000
