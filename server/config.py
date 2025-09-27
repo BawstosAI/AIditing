@@ -15,7 +15,7 @@ FRONTEND_ORIGINS: list[str] = [
     o.strip()
     for o in os.getenv(
         "FRONTEND_ORIGINS",
-        "http://localhost:3000,http://127.0.0.1:3000",
+        "http://localhost:3000,http://127.0.0.1:3000,https://bawstosai.github.io",
     ).split(",")
     if o.strip()
 ]
