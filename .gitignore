@@ -1,0 +1,37 @@
+﻿# Node
+frontend/node_modules/
+frontend/.next/
+frontend/.turbo/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.next/
+
+# Python
+server/.venv/
+.venv/
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.sqlite3
+
+# Data
+server/data/
+!server/data/README.md
+samples/*.mp4
+samples/*.mov
+samples/*.m4a
+
+# OS / IDE
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+uvicorn_out.txt
+uvicorn_err.txt
+
+# Env files
+.env
+.env.*
