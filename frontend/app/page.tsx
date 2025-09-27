@@ -2,7 +2,9 @@
 
 import { useCallback, useEffect, useState } from "react";
 
-const API_BASE = process.env.NEXT_PUBLIC_API_BASE || "http://localhost:8000";
+const IS_PROD = process.env.NODE_ENV === "production";
+const RENDER_API = "https://aiditing-backend.onrender.com";
+const API_BASE = IS_PROD ? RENDER_API : (process.env.NEXT_PUBLIC_API_BASE || "http://localhost:8000");
 
 export default function Page() {
   const [video, setVideo] = useState<File | null>(null);
@@ -88,7 +90,7 @@ export default function Page() {
 
   return (
     <div>
-      <p style={{ opacity: 0.85, marginBottom: 16 }}>Glissez-déposez une vidéo (.mp4) et une piste audio propre (.wav). Pas d'IA générative texte, on coupe seulement. Cette démo produit un fichier mock.</p>
+      <p style={{ opacity: 0.85, marginBottom: 16 }}>Glissez-déposez une vidéo (.mp4) et une piste audio propre (.wav). Pas d'IA générative texte, on coupe seulement.</p>
 
       <div
         onDrop={onDrop}
