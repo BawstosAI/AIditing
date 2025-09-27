@@ -20,6 +20,8 @@ COPY server/ /app
 # Expose uvicorn port
 EXPOSE 8000
 
-CMD ["python", "-m", "uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8000"]
+# Render fournit $PORT. Utilisons-le (par défaut 8000 en local)
+ENV PORT=8000
+CMD ["sh", "-c", "python -m uvicorn main:app --host 0.0.0.0 --port ${PORT}"]
 
 
