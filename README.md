@@ -80,6 +80,23 @@ npm run dev
 - Frontend: http://localhost:3000
 - Backend:  http://localhost:8000/docs
 
+### Déploiement backend (Render)
+
+1) Bouton one‑click:
+
+   [Deploy to Render](https://render.com/deploy)
+
+   Puis sélectionnez votre repo `BawstosAI/AIditing`. Render détectera `render.yaml` et créera un service web Docker.
+
+2) À la fin du déploiement, notez l’URL (ex: `https://aiditing-backend.onrender.com`).
+
+3) Pour utiliser ce backend depuis le site GitHub Pages, reconstruisez le front avec:
+
+   - soit en définissant `NEXT_PUBLIC_API_BASE` au build Pages
+   - soit en modifiant `frontend/app/page.tsx` pour pointer sur l’URL publique
+
+4) CORS: `server/config.py` accepte `https://bawstosai.github.io` par défaut. Ajustez `FRONTEND_ORIGINS` si besoin.
+
 ### Dépannage Backend
 
 - Erreur "Could not import module 'main'": lancé depuis la racine avec `main:app`. Corrige en `server.main:app`.

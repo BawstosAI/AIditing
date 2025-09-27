@@ -1,0 +1,15 @@
+services:
+  - type: web
+    name: aiditing-backend
+    env: docker
+    region: frankfurt
+    plan: free
+    dockerfilePath: server/Dockerfile
+    autoDeploy: true
+    healthCheckPath: /docs
+    envVars:
+      - key: PYTHONUNBUFFERED
+        value: "1"
+      - key: FRONTEND_ORIGINS
+        value: "https://bawstosai.github.io,https://bawstosai.github.io/AIditing"
+

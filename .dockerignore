@@ -1,0 +1,16 @@
+.git
+.github
+frontend
+samples
+server/data
+server/.venv
+__pycache__
+*.py[cod]
+*.pyo
+*.pyd
+.DS_Store
+Thumbs.db
+uvicorn_out.txt
+uvicorn_err.txt
+
+
