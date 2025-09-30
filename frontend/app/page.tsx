@@ -3,7 +3,7 @@
 import { useCallback, useEffect, useState } from "react";
 
 const IS_PROD = process.env.NODE_ENV === "production";
-const RENDER_API = "https://aiditing-backend.onrender.com";
+const RENDER_API = "https://aiditing-backend-hbjg.onrender.com";
 const API_BASE = IS_PROD ? RENDER_API : (process.env.NEXT_PUBLIC_API_BASE || "http://localhost:8000");
 
 export default function Page() {

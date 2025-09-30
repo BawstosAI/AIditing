@@ -7,7 +7,7 @@ services:
     dockerContext: .
     dockerfilePath: server/Dockerfile
     autoDeploy: true
-    healthCheckPath: /docs
+    healthCheckPath: /health
     envVars:
       - key: PYTHONUNBUFFERED
         value: "1"

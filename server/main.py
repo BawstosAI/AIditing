@@ -6,9 +6,10 @@ from typing import Annotated
 
 from fastapi import BackgroundTasks, FastAPI, File, HTTPException, UploadFile
 from fastapi.middleware.cors import CORSMiddleware
+import re
 from fastapi.responses import FileResponse, JSONResponse
 
-from .config import FRONTEND_ORIGINS
+from .config import FRONTEND_ORIGINS, FRONTEND_ORIGIN_REGEX
 from .jobs import Job, job_store
 from .pipeline import run_real_pipeline
 from .storage import ensure_job_dirs, get_result_path, get_upload_paths, save_stream_to_path
@@ -16,13 +17,38 @@ from .storage import ensure_job_dirs, get_result_path, get_upload_paths, save_st
 app = FastAPI(title="AIditing API", version="0.1.0")
 
 # CORS for frontend dev
+compiled_origin_regex = None
+if FRONTEND_ORIGIN_REGEX:
+    try:
+        compiled_origin_regex = re.compile(FRONTEND_ORIGIN_REGEX)
+    except re.error:
+        compiled_origin_regex = None
+
+
+def _allow_origin_fn(origin: str) -> bool:  # FastAPI calls this when using allow_origin_regex
+    if not origin:
+        return False
+    if origin in FRONTEND_ORIGINS:
+        return True
+    if compiled_origin_regex and compiled_origin_regex.match(origin):
+        return True
+    return False
+
+
 app.add_middleware(
     CORSMiddleware,
     allow_origins=FRONTEND_ORIGINS,
+    allow_origin_regex=FRONTEND_ORIGIN_REGEX,
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
 )
+
+
+@app.get("/health")
+async def health() -> JSONResponse:
+    # Fast and simple healthcheck endpoint
+    return JSONResponse({"status": "ok"})
 
 
 @app.post("/process")

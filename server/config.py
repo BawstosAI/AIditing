@@ -20,6 +20,13 @@ FRONTEND_ORIGINS: list[str] = [
     if o.strip()
 ]
 
+# Optional regex pattern to allow origins (e.g., any GitHub Pages user site)
+# By default, allow https://<username>.github.io
+FRONTEND_ORIGIN_REGEX: str | None = os.getenv(
+    "FRONTEND_ORIGIN_REGEX",
+    r"^https://[a-zA-Z0-9-]+\.github\.io$",
+)
+
 # Ensure directories exist
 for _dir in (DATA_DIR, UPLOADS_DIR, RESULTS_DIR, JOBS_DIR):
     _dir.mkdir(parents=True, exist_ok=True)
